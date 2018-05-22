@@ -1,6 +1,6 @@
 var socket = io();
 console.log('Inside index.js');
-socket.on('connect', () => {
+socket.on('connect', function() {
   console.log('Connected to the server !');
 
   //
@@ -16,7 +16,7 @@ socket.on('newMessage',function(message){
   li.text(`${message.from} : ${message.text}`);
   $('#messages').append(li);
 });
-socket.on('disconnect',() => {
+socket.on('disconnect',function() {
   console.log('Disconnected from the server !');
 });
 //
@@ -34,6 +34,6 @@ $('#message-form').on('submit',function(e){
     from: 'User',
     text: $('[name=message]').val()
   },function(){
-    
+
   });
 });
