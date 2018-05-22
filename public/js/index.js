@@ -3,11 +3,11 @@ console.log('Inside index.js');
 socket.on('connect', () => {
   console.log('Connected to the server !');
 
-
-  socket.emit('createMessage',{
-    from:'Browser',
-    text:'Hello Server !'
-  })
+  // 
+  // socket.emit('createMessage',{
+  //   from:'Browser',
+  //   text:'Hello Server !'
+  // })
 });
 
 socket.on('newMessage',function(message){
