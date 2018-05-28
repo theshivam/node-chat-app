@@ -12,7 +12,6 @@ function scrollToBottom(){
   if (clientHeight + scrollTop + newMessageHeight + prevMessageHeight >= scrollHeight){
      messages.scrollTop(scrollHeight);
   }
-
 }
 
 socket.on('connect', function() {
@@ -34,7 +33,6 @@ socket.on('connect', function() {
   //   text:'Hello Server !'
   // })
 });
-
 
 socket.on('newMessage',function(message){
   var formattedTime = moment(message.createdAt).format('h:mm a');
@@ -89,7 +87,6 @@ $('#message-form').on('submit',function(e){
   e.preventDefault();
   var messageTextBox = $('[name=message]');
   socket.emit('createMessage',{
-    from: 'User',
     text: messageTextBox.val()
   },function(){
     messageTextBox.val('');
