@@ -18,12 +18,23 @@ function scrollToBottom(){
 socket.on('connect', function() {
   console.log('Connected to the server !');
 
+  var params = $.deparam(window.location.search);
+
+  socket.emit('join', params, function(error){
+    if (error){
+      alert(error);
+      window.location.href = '/';
+    }else{
+      console.log('No error! Joining chat room');
+    }
+  });
   //
   // socket.emit('createMessage',{
   //   from:'Browser',
   //   text:'Hello Server !'
   // })
 });
+
 
 socket.on('newMessage',function(message){
   var formattedTime = moment(message.createdAt).format('h:mm a');
@@ -46,6 +57,14 @@ socket.on('disconnect',function() {
 // }, function(data){
 //   console.log('Got it !',data);
 // });
+
+socket.on('updateUserList', function(userList){
+    var ol = $('<ol></ol>');
+    userList.forEach(function (user){
+      ol.append($('<li></li>').text(user));
+    });
+    $('#users').html(ol);
+});
 
 socket.on('newLocationMessage', function(message){
   var formattedTime = moment(message.createdAt).format('h:mm a');
